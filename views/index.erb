@@ -1,0 +1,73 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>hogwarts</title>
+</head>
+<style>
+.hufflepuff {
+  font-family: cursive;
+  font-size: 20px;
+  color: yellow;
+  text-decoration: none;
+}
+.ravenclaw {
+  font-family: cursive;
+  font-size: 20px;
+  color: blue;
+  text-decoration: none;
+}
+.slytherin {
+  font-family: cursive;
+  font-size: 20px;
+  color: green;
+  text-decoration: none;
+}
+.gryffindor {
+  font-family: cursive;
+  font-size: 20px;
+  color: red;
+  text-decoration: none;
+}
+</style>
+<body>
+  <header>
+    <h1> WELCOME TO HOGWARTS </h1>
+  </header>
+  <ul>
+    <% wizards.each do |key,wizard|%>
+      <li><%=wizard[:name]%> is registered at Hogwarts! Learn all about this budding wizard <a href="/student/<%=wizard[:id]%>">
+        here</a></li>
+      <% if wizard[:house] == "" %>
+        <form action="/sort/<%=wizard[:id]%>" method="POST">
+          <input type="hidden" name="_method" value="put">
+          <button> sorting hat! </button>
+        </form>
+      <% else %>
+          <p class=<%=wizard[:house]%>><%=wizard[:house]%></p>
+      <%end%>
+    <%end%>
+  </ul>
+  <h3> Register at Hogwarts!</h3>
+  <form action="/student" method="POST">
+    <input type="text" name="name" placeholder="your name">
+    <input type="text" name="age" placeholder="your age">
+    <input type="text" name="fav_spell" placeholder="what's your go to spell">
+    <button> ENROLL! </button>
+  </form>
+  <h3> Visit The Houses! </h3>
+
+  <p><a href="/houses/gryffindor" class="gryffindor">Gryffindor</a></p>
+  <p><a href="/houses/ravenclaw" class="ravenclaw">Ravenclaw</a></p>
+  <p><a href="/houses/hufflepuff" class="hufflepuff">Hufflepuff</a></p>
+  <p><a href="/houses/slytherin" class="slytherin">Slytherin</a></p>
+  <h3> Search </h3>
+  <form action="/search" method="GET">
+    <input type="text" name="search" placeholder="name">
+  </form>
+  <% if search.length > 0 %>
+    <p> <%=search[0][:name]%> is enrolled at Hogwarts. Learn more about this wizard: <a href="/student/<%=search[0][:id]%>"><%=search[0][:name]%></a></p>
+  <% elsif search == {}%>
+    <p> I'm sorry, no one with that name attends Hogwarts.</p>
+  <% end%>
+</body>
+</html>

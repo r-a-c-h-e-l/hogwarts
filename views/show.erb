@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title><%=wizard[:name]%></title>
+</head>
+<body>
+  <header>
+    <h1> All About <%=wizard[:name]%>! </h1>
+  </header>
+  <% wizard.each do |key,value|%>
+    <%if key != :id %>
+      <p> <%=key%> : <%=value%> </p>
+    <%end%>
+  <% end %>
+  <h3>Know something about this wizard you want to share?</h3>
+  <form action="/student/<%=wizard[:id]%>" method="POST">
+    <input type="hidden" name="_method" value="put">
+    <input type="text" name="category" placeholder="category of fact">
+    <input type="text" name="fact" placeholder="fact">
+    <button> submit this fascinating fact!</button>
+  </form>
+  <h3>Remove this student from Hogwarts:</h3>
+  <form action="/student/<%=wizard[:id]%>" method="POST">
+    <input type="hidden" name="_method" value="delete">
+    <button> SUSPEND! </button>
+  </form>
+  <br>
+  <a href="/students">back to the registry!</a>
+</body>
+</html>

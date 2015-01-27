@@ -1,0 +1,17 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title><%=house.keys[0]%></title>
+</head>
+<body>
+  <header>
+    <h1><%=house.keys[0]%></h1>
+  </header>
+  <h3> Members of the house:</h3>
+  <% key = house.keys[0]%>
+  <% house[key].each do |person|%>
+  <p><a href="/student/<%=person[:id]%>" class="classy"><%=person[:name]%></a></p>
+  <%end%>
+  <a href="/students">back to the registry!</a>
+</body>
+</html>
